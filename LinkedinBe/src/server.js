@@ -21,9 +21,7 @@ server.use("/search", searchRouter);
 
 server.use(errorHandlers);
 
-mongoose.connect(
-  process.env.MONGO_CONNECTION || "mongodb://localhost:27017/linkedin"
-);
+mongoose.connect(process.env.MONGO_CONNECTION || "mongodb://localhost:27017");
 mongoose.connection.on("connected", () => {
   console.log("Connected  to mongo");
 });
