@@ -21,7 +21,7 @@ server.use("/search", searchRouter);
 
 server.use(errorHandlers);
 
-mongoose.connect(process.env.MONGO_CONNECTION || "mongodb://localhost:27017");
+mongoose.connect(process.env.MONGO_CONNECTION);
 mongoose.connection.on("connected", () => {
   console.log("Connected  to mongo");
 });
