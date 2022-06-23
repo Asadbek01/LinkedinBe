@@ -23,11 +23,11 @@ server.use(errorHandlers);
 
 mongoose.connect(process.env.MONGO_CONNECTION);
 mongoose.connection.on("connected", () => {
-  console.log("Connected  to mongo");
+  console.log("Connected  to mongo ");
 });
 
 server.listen(PORT, () => {
-  console.log(`Server listens to ${PORT}`);
+  console.log(`Server is  listening to ${PORT}`);
   console.table(expressListEndpoints(server));
 });
 
