@@ -8,6 +8,7 @@ import jobsRouter from "./jobs/jobs.js";
 import { errorHandlers } from "./middlewares/errorHandlers.js";
 import searchRouter from "./search/search.js";
 import expressListEndpoints from "express-list-endpoints";
+import UserRouter from "./user/user.js";
 
 const server = express();
 const PORT = process.env.PORT;
@@ -18,6 +19,7 @@ server.use("/posts", postsRouter);
 server.use("/profiles", profilesRouter, experienceRouter);
 server.use("/jobs", jobsRouter);
 server.use("/search", searchRouter);
+server.use("/user", UserRouter);
 
 server.use(errorHandlers);
 
