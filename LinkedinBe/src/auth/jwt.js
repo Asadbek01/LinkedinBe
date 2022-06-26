@@ -7,7 +7,6 @@ const JwtAuthenticate = async (user) => {
   return accessToken;
 };
 //   generate token
-
 const generateToken = (payload, _id) =>
   new Promise((res, rej) =>
     jwt.sign(
