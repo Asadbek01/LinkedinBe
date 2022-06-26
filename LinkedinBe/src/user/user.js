@@ -1,6 +1,7 @@
 import express from "express";
 import createHttpError from "http-errors";
 import { JwtAuthenticate } from "../auth/jwt.js";
+import { JWTAuthMiddleware } from "../auth/token.js";
 import UserModel from "../user/schema.js";
 const UserRouter = express.Router();
 // 1
@@ -15,7 +16,7 @@ UserRouter.post("/new", async (req, res, next) => {
   }
 });
 // 2
-UserRouter.get("/", async (req, res, next) => {
+UserRouter.get("/", JWTAuthMiddleware, async (req, res, next) => {
   try {
     const user = await UserModel.find();
     res.send(user);
@@ -37,20 +38,15 @@ UserRouter.get("/:id", async (req, res, next) => {
   }
 });
 // 4
-UserRouter.put("/:id", async (req, res, next) => {
+UserRouter.get("/me", async (req, res, next) => {
   try {
-    const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!user)
-      return next(
-        createHttpError(404, `The user with ${req.params.id} is not found.`)
-      );
-    res.send(user);
+    const userMe = await UserModel.findById(req.user._id);
+    res.send(userMe);
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
+
 // 5
 UserRouter.delete("/:id", async (req, res, next) => {
   try {
@@ -79,4 +75,20 @@ UserRouter.post("/login", async (req, res, next) => {
     console.log(error);
   }
 });
+// 7
+UserRouter.put("/:id", async (req, res, next) => {
+  try {
+    const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!user)
+      return next(
+        createHttpError(404, `The user with ${req.params.id} is not found.`)
+      );
+    res.send(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default UserRouter;
