@@ -1,7 +1,6 @@
 {
   "name": "linkedin-be",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -31,5 +30,6 @@
   "devDependencies": {
     "dotenv": "^14.1.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "description": ""
 }
