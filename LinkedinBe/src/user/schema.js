@@ -6,12 +6,12 @@ const UserModel = new Schema(
   {
     firstName: { type: String, required: true },
     surename: { type: String, required: true },
-    password: { type: Number, required: true },
+    password: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-UserModel.pre("save", async function () {
+UserModel.pre("save", async function (next) {
   const newUser = this;
   const plainPW = newUser.password;
   if (newUser.isModified("password")) {

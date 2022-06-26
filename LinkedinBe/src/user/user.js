@@ -6,11 +6,12 @@ const UserRouter = express.Router();
 // 1
 UserRouter.post("/new", async (req, res, next) => {
   try {
+    console.log(req.body);
     const newUser = new UserModel(req.body);
-    await newUser.save();
-    res.send(newUser);
+    const { _id } = await newUser.save();
+    res.send({ _id });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 // 2
@@ -75,7 +76,7 @@ UserRouter.post("/login", async (req, res, next) => {
       next(createHttpError(401, "Credentials are not ok"));
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 export default UserRouter;
