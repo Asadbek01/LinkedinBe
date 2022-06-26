@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
-import UserRouter from "../user/user";
 
 // Create user Interface
-const JwtAuthenticate = async (user) => {
+export const JwtAuthenticate = async (user) => {
   const accessToken = await generateToken(user._id);
   return accessToken;
 };

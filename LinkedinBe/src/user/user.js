@@ -1,5 +1,6 @@
 import express from "express";
 import createHttpError from "http-errors";
+import { JwtAuthenticate } from "../auth/jwt.js";
 import UserModel from "../user/schema.js";
 const UserRouter = express.Router();
 // 1
@@ -58,6 +59,21 @@ UserRouter.delete("/:id", async (req, res, next) => {
       : next(
           createHttpError(404, `The user with ${req.params.id} is not found.`)
         );
+  } catch (error) {
+    next(error);
+  }
+});
+// 6
+UserRouter.post("/login", async (req, res, next) => {
+  try {
+    const { firstName, password } = req.body;
+    const user = await UserModel.checkCredentials(firstName, password);
+    if (user) {
+      const accessToken = await JwtAuthenticate(user);
+      res.send(accessToken);
+    } else {
+      next(createHttpError(401, "Credentials are not ok"));
+    }
   } catch (error) {
     next(error);
   }
