@@ -13,7 +13,6 @@ export const JWTAuthMiddleware = async (req, res, next) => {
       const token = req.headers.authorization.replace("Bearer ", "");
       // 3. Verify the token, if everything goes fine we are getting back the _id of the logged in user, otherwise an error will be thrown by jwt library
       const decodedToken = await verifyToken(token);
-      console.log("DECODED TOKEN ", decodedToken);
       // 4. Find the user in db and attach him/her to the request object
       const user = await UserModel.findById(decodedToken._id);
       if (user) {
