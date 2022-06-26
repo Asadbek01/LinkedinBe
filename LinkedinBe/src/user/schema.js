@@ -6,7 +6,7 @@ const UserModel = new Schema(
   {
     firstName: { type: String, required: true },
     surename: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: Number, required: true },
   },
   { timestamps: true }
 );
