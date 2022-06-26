@@ -71,7 +71,7 @@ UserRouter.post("/login", async (req, res, next) => {
     const user = await UserModel.checkCredentials(firstName, password);
     if (user) {
       const accessToken = await JwtAuthenticate(user);
-      res.send(accessToken);
+      res.send({ accessToken });
     } else {
       next(createHttpError(401, "Credentials are not ok"));
     }
