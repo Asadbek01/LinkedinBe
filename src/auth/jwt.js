@@ -2,11 +2,12 @@ import jwt from "jsonwebtoken";
 
 // Create user Interface
 export const JwtAuthenticate = async (user) => {
-  const accessToken = await generateToken(user._id);
+  const accessToken = await generateToken({ _id: user._id });
+  await user.save();
   return accessToken;
 };
 //   generate token
-const generateToken = (payload, _id) =>
+const generateToken = (payload) =>
   new Promise((res, rej) =>
     jwt.sign(
       payload,
@@ -20,8 +21,8 @@ const generateToken = (payload, _id) =>
   );
 export const verifyToken = (token) =>
   new Promise((res, rej) =>
-    jwt.verify(token, process.env.JWT_SECRET, (err, token) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
       if (err) rej(err);
-      else res(token);
+      else res(payload);
     })
   );
