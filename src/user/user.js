@@ -110,7 +110,7 @@ UserRouter.get(
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 export default UserRouter;
