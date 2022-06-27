@@ -9,11 +9,14 @@ import { errorHandlers } from "./middlewares/errorHandlers.js";
 import searchRouter from "./search/search.js";
 import expressListEndpoints from "express-list-endpoints";
 import UserRouter from "./user/user.js";
-
+import passport from "passport";
+import googleStrategy from "./auth/oauth.js";
 const server = express();
 const PORT = process.env.PORT;
+
 server.use(cors());
 server.use(express.json());
+passport.use("google", googleStrategy);
 
 server.use("/posts", postsRouter);
 server.use("/profiles", profilesRouter, experienceRouter);
