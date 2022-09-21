@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+const {Schema, model} = mongoose;
 import bcrypt from "bcrypt";
 
 const UserModel = new Schema(
   {
-    firstName: { type: String, required: true },
-    surename: { type: String, required: true },
-    password: { type: String, required: true },
+    firstName: {type: String, required: true},
+    surename: {type: String, required: true},
+    password: {type: String, required: true},
   },
-  { timestamps: true }
+  {timestamps: true}
 );
 
 UserModel.pre("save", async function (next) {
@@ -29,7 +29,7 @@ UserModel.methods.toJSON = function () {
   return userObject;
 };
 UserModel.statics.checkCredentials = async function (firstName, plainPw) {
-  const user = await this.findOne({ firstName });
+  const user = await this.findOne({firstName});
 
   if (user) {
     const isMatch = await bcrypt.compare(plainPw, user.password);
