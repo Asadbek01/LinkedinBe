@@ -5,7 +5,7 @@ import postsRouter from "./Posts/posts.js";
 import profilesRouter from "./Profiles/profiles.js";
 import experienceRouter from "./Profiles/experienece.js";
 import jobsRouter from "./jobs/jobs.js";
-import { errorHandlers } from "./middlewares/errorHandlers.js";
+import {errorHandlers} from "./middlewares/errorHandlers.js";
 import searchRouter from "./search/search.js";
 import expressListEndpoints from "express-list-endpoints";
 import UserRouter from "./user/user.js";
